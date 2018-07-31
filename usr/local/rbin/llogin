@@ -1,0 +1,26 @@
+#!/bin/csh
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+#
+if ( $#argv < 1 ) then
+   echo 'llogin: usage llogin <hostname> {command {parameters..}}'
+   exit ( 0 )
+endif
+
+## hostname >! $HOME/.rhosts
+
+if ( ($WSMODE == local) && $?EXDISPLAY ) xhost +$argv[1]
+
+if ( $#argv == 1 ) then
+    if ( ! $?EXDISPLAY ) set EXDISPLAY=0
+    setenv TERM "+s $EXDISPLAY $XTERM $TERM"
+else
+   hostname >! $HOME/.hushlogin
+   setenv TERM "+e $argv[2-$#argv]"
+endif
+
+rlogin $argv[1]
+

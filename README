@@ -1,0 +1,9 @@
+Old login scripts from years gone by:
+
+extract profiles.tgz to usr/local/profiles/
+extract rbin.tar     to usr/local/rbin/
+
+Kept the zips made from source as these preserve permissions and timestamps better than git does!
+
+Bri	Jul 2018
+

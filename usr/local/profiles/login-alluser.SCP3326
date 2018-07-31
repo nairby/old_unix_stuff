@@ -1,0 +1,90 @@
+#!/bin/csh
+#
+#
+#   Author:  Mike Gahan
+#   Last Updated:  3-Dec-93
+#
+
+if ( ! $?LPS ) then
+   set LPS=/usr/local/profiles
+endif
+
+source $LPS/set.PLATFORM
+
+# Set path and other environment variables for Solaris
+#
+if ($PLATFORM == sun) then 
+
+  if (`uname -r` == "5.10") then
+
+     # Set paths for Solaris10
+     #
+     set path = ( /usr/local/bin /usr/local/rbin /usr/bin /usr/sbin /usr/local/public /usr/local/rlib/SunStudio11/SUNWspro/bin /usr/ucb /usr/ccs/bin /usr/openwin/bin /usr/dt/bin /usr/sfw/bin . )
+     setenv MANPATH /usr/local/man/ucl:/usr/man:/usr/share/man:/usr/dt/share/man:/usr/openwin/share/man:/nfs/rcs/solv10/usr/local/rlib/SunStudio11/SUNWspro/man:/usr/sfw/man
+     setenv LD_LIBRARY_PATH /usr/lib:/usr/openwin/lib:/usr/local/rlib
+     
+     else
+     # Set paths for Solaris8
+     #
+     set path = ( /usr/local/bin /usr/local/rbin /usr/bin /usr/sbin /usr/local/public /usr/ucb /usr/ccs/bin /usr/openwin/bin /usr/local/rlib/SunWorkshop/SUNWspro/bin /usr/dt/bin . )
+     setenv MANPATH /usr/local/man/ucl:/usr/man:/usr/share/man:/usr/dt/share/man:/usr/openwin/share/man:/usr/local/rlib/SunWorkshop/SUNWspro/man
+     setenv LD_LIBRARY_PATH /usr/lib:/usr/openwin/lib:/usr/local/rlib
+     endif
+
+
+  else
+  # PLATFORM other than sun
+  #
+  setenv LANG En_US
+  set path = ( /usr/local/bin /usr/local/rbin /bin /usr/bin /etc /usr/ucb /usr/bin/X11 /usr/local/public . )
+  endif
+
+
+# Addition to path for AIX
+#
+if ($PLATFORM == rs6) then
+    set path = ($path /usr/vac/bin)
+endif
+
+
+# Global settings
+#
+setenv LC_COLLATE C
+setenv TERMINFO /usr/local/rlib/terminfo
+
+$LPS/do.motd
+
+if ( ! $?ENVIRONMENT ) setenv ENVIRONMENT ONLINE
+if ( $ENVIRONMENT != BATCH ) then
+  source $LPS/process.TERM
+  if ( ! $?XTERM ) then
+   source $LPS/set.WSMODE
+   source $LPS/set.XTERM
+  endif
+  source $LPS/set.TERM
+endif
+source $LPS/set.CBSERVER
+
+setenv EDITOR /usr/bin/vi
+setenv PAGER  more
+setenv EXINIT 'set redraw showmode'
+
+# Allow TZ to be set by defaults file on each platform - SM 18thJuly 2000
+# (see SCP 1814 for details)
+
+# find maildrop/box and check for mail
+setenv MAILDROP /usr/spool/mail/$USER
+setenv MAILBOX  /usr/spool/mail/$USER
+
+mailsize
+pwwarn 150
+
+# Default product versions - for use command
+setenv XLFCFG ''
+
+# Miranda library location
+setenv MIRALIB /usr/local/rlib/miralib
+
+# Sql*Net V2 config file
+setenv TNS_ADMIN /etc/tnsnames
+

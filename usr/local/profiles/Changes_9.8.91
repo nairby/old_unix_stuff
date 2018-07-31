@@ -1,0 +1,18 @@
+login-system:
+
+   Only set LPS if not already set. Facilitates test versions.
+
+   Move do.messages to top, so local motd follows global without a break.
+
+   Move path setting up so cursor call works.
+
+
+set.TERM:
+
+   Make tset operate quietly
+
+   stty intr susp quit dsusp to reasonable values
+
+   stty erase to ^H for X-terminals, DEL for all others. if $deferase is
+   set (ie in cshrc like defterm) this overrides.
+

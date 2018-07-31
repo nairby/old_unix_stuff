@@ -1,0 +1,40 @@
+#!/bin/csh
+#
+#   This is the newcomer's .cshrc file
+#
+#   Author:      Mike Gahan
+#   Version:     1
+#   Date:        23-04-91
+#   Last Update: 15-07-98  SM  'platform' out comp and repl aliases
+#
+
+if ( ! $?LPS ) then
+   set LPS=/usr/local/profiles
+endif
+
+# Prevent accidental deletion using re-direction. (>! overrides)
+set noclobber
+
+# Prevent accidental logging out by end-of-file.
+set ignoreeof
+
+# Ask for confirmation when deleting files by use of rm, mv or cp.
+alias rm 'rm -i'
+alias mv 'mv -i'
+alias cp 'cp -i'
+
+source $LPS/set.PLATFORM
+if ($PLATFORM == sun) then
+   # Tell users of comp and repl how to end their mail (using prompter)
+   alias comp 'echo Use Ctrl-D to end your mail message; /usr/local/rbin/comp'
+   alias repl 'echo Use Ctrl-D to end your mail message; /usr/local/rbin/repl'
+else
+   # Tell users of comp and repl how to end their mail (using prompter)
+   alias comp 'echo Use Ctrl-D to end your mail message; /usr/bin/comp'
+   alias repl 'echo Use Ctrl-D to end your mail message; /usr/bin/repl'
+endif
+
+
+# Don't squander disc space on core dumps.
+limit coredumpsize 0
+

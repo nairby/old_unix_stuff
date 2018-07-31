@@ -1,0 +1,9 @@
+Path: Mail
+Unseen-Sequence: unseen
+Editor: /usr/local/rbin/defaultedit
+comp: -editor prompter
+prompter-next: /usr/local/rbin/defaultedit
+send: -push -forward
+repl: -nocc all -editor prompter
+Msg-Protect: 600
+Folder-Protect: 700

@@ -1,0 +1,29 @@
+#!/bin/csh
+#
+#   Set the environment variable CBSERVER
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+#   Version: 2
+#   Date:    23-5-91
+#   Set CBSERVER correctly for bird-like ps2s
+
+# For the moment just use ts
+setenv CBSERVER "link-1.ts.bcc.ac.uk"
+exit 0
+
+#if ( $?cls ) then
+#   setenv CBSERVER "rs6-svr-1.cls-${cls}.bcc.ac.uk"
+#else
+#   if {( hostname | grep -s '.ts.' )} then
+#      setenv CBSERVER `hostname`
+#   else
+#      set stem=`hostname | sed 's/\..*//'`
+#      setenv CBSERVER `hostname | sed "s/$stem/rs6-svr-1/"`
+#   endif
+#endif
+#
+#

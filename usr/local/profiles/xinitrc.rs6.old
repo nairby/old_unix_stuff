@@ -1,0 +1,6 @@
+#!/bin/csh -f
+xclock =-0+0 -fg Blue -analog -bg Wheat -hd CadetBlue -hl Blue &
+
+if ( ! $?XSTATION ) then
+/usr/local/rbin/wlogin -geometry 80x25+0+0
+endif

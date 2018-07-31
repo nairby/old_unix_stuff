@@ -1,0 +1,76 @@
+#!/bin/csh
+#
+#   Set the environment variable PLATFORM
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+#   Version: 2
+#   Date:    23-5-91
+#   Extend to set PLATFORM correctly for bird-like ps2s
+
+set plat=`hostname | sed 's/[-.].*//'`
+
+switch ($plat)
+
+   case link:
+     set plat=`hostname | sed 's/link-[0-9]*\.//;s/\..*//'`
+
+     if ($plat == ts) set plat=rs6
+     breaksw
+
+   case rs6:
+     breaksw
+
+       case eagle:
+       case penguin:
+       case robin:
+       case crane:
+       case stork:
+       case parrot:
+       case magpie:
+       case budgie:
+       case vulture:
+       case raven:
+       case tims:
+       case owl:
+       case goshawk:
+       case condor:
+       case chicken:
+       case dove:
+       case kookaburra:
+       case coot:
+       case canary:
+       case swallow:
+       case swan:
+       case moa:
+       case finch:
+       case parakeet:
+       case cockatiel:
+       case dodo:
+       case falcon:
+       case dodo2:
+       case curlew:
+       case ostrich:
+       case tit:
+       case mynah:
+       case emu:
+       case toucan:
+       case kiwi:
+       case shrike:
+       case cock:
+       case merill:
+       case thrush:
+       case bustard:
+       case crow:
+       case shag:
+
+        set plat=ps2
+        set cls=1
+        breaksw
+
+endsw
+
+setenv PLATFORM $plat

@@ -1,0 +1,10 @@
+#   System .Xdefaults file
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+Mwm*buttonBindings : DefaultButtonBindings
+aixterm*fullCursor : True
+aixterm*scrollBar  : True
+

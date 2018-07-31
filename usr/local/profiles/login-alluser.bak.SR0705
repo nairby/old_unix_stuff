@@ -1,0 +1,49 @@
+#!/bin/csh
+#
+#
+#   Author:  Mike Gahan
+#   Last Updated:  3-Dec-93
+#
+
+if ( ! $?LPS ) then
+   set LPS=/usr/local/profiles
+endif
+
+setenv LANG En_US
+setenv LC_COLLATE C
+setenv TERMINFO /usr/local/rlib/terminfo
+
+$LPS/do.motd
+
+set path = (. /usr/local/bin /usr/local/rbin /bin /usr/bin /etc /usr/ucb /usr/bin/X11 /usr/local/public)
+source $LPS/set.PLATFORM
+if ( ! $?ENVIRONMENT ) setenv ENVIRONMENT ONLINE
+if ( $ENVIRONMENT != BATCH ) then
+  source $LPS/process.TERM
+  if ( ! $?XTERM ) then
+   source $LPS/set.WSMODE
+   source $LPS/set.XTERM
+  endif
+  source $LPS/set.TERM
+endif
+source $LPS/set.CBSERVER
+
+setenv EDITOR /usr/bin/vi
+setenv PAGER  more
+setenv EXINIT 'set redraw showmode'
+
+#setenv TZ BST-1
+setenv TZ GMT0
+#setenv TZ GMT0BST,M3.5.0,M10.5.0
+
+# find maildrop/box and check for mail
+setenv MAILDROP /usr/spool/mail/$USER
+setenv MAILBOX  /usr/spool/mail/$USER
+mailsize
+pwwarn 98
+
+# Default product versions - for use command
+setenv XLFCFG ''
+
+# Miranda library location
+setenv MIRALIB /usr/local/rlib/miralib

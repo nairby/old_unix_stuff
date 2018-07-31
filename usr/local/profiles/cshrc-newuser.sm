@@ -1,0 +1,27 @@
+#!/bin/csh
+#
+#   This is the newcomer's .cshrc file
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+#
+# Prevent accidental deletion using re-direction. (>! overrides)
+set noclobber
+
+# Prevent accidental logging out by end-of-file.
+set ignoreeof
+
+# Ask for confirmation when deleting files by use of rm, mv or cp.
+alias rm 'rm -i'
+alias mv 'mv -i'
+alias cp 'cp -i'
+
+# Tell users of comp and repl how to end their mail (using prompter)
+alias comp 'echo Use Ctrl-D to end your mail message; /usr/bin/comp'
+alias repl 'echo Use Ctrl-D to end your mail message; /usr/bin/repl'
+
+# Don't squander disc space on core dumps.
+limit coredumpsize 0
+

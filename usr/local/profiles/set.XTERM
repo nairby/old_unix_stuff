@@ -1,0 +1,58 @@
+#!/bin/csh
+#
+#   Set the environment variable XTERM
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+
+if ( ! $?WSMODE ) then
+  echo Error - WSMODE not set 
+  exit
+endif
+
+if ( $WSMODE == local ) then
+  set xterm=$PLATFORM
+else
+
+ if ( ! $?tty ) set tty=`tty | sed 's+/dev/++;s+[^a-z,A-Z].*++'`
+
+ if ( $tty == ttyR || $tty == ttyx ) then
+   set xterm=no
+ else
+  if ( $?XSTATION ) then
+	set xx=$XSTATION
+  else
+	    set xx=`/usr/bin/who am i`
+
+  endif
+
+  set xterm=`echo $xx | sed 's/.*(//;s/[^a-z,A-Z].*//;2,$d'`
+
+  switch ( $xterm )
+
+   case oper:
+   case xibm:
+      set xterm=IBM120
+      breaksw
+
+   case rs6:
+      set xterm=IBM_hft
+      breaksw
+
+   case xhp:
+   case hpxt:
+      set xterm=hpxt
+      breaksw
+
+   default:
+      set xterm=no
+      breaksw
+  endsw
+ endif
+
+endif
+
+setenv XTERM $xterm

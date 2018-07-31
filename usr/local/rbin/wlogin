@@ -1,0 +1,59 @@
+#!/bin/csh
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    7-5-91
+#
+#
+if ( $PLATFORM == ps2 ) then
+  set tflag='-n'
+else
+  set tflag='-T'
+endif
+
+set tflag='-n'
+
+set estr=''
+set istr=''
+ 
+if ( $#argv > 0 ) then
+  if {( echo -n $argv[1] | grep -s '^[\=\-]' > /dev/null )} then
+    set firstarg=1
+  else
+    set firstarg=2
+    set hostarg=$argv[1]
+  endif
+else
+  set firstarg=2
+endif
+
+
+if ( ! $?hostarg ) then
+
+  if { (hostname | grep -s '\-svr\-') > /dev/null } then
+     set ho=ts
+     set estr="-e ./llogin ts"
+  else 
+     set ho=`sname`
+     set estr="-ls"
+  endif
+
+else 
+   if ( $hostarg == local ) then
+      set ho=`sname`
+      set estr="-ls"
+   else 
+      set ho=`sname $hostarg`
+      set estr="-e llogin $hostarg"
+   endif
+endif
+
+if ( $?BITMAPS ) then
+  set bm=$BITMAPS
+else
+  set bm=$HOME
+endif
+
+if ( -f $bm/$ho ) set istr="-ib $bm/$ho"
+
+/usr/dt/bin/dtterm $tflag $ho $argv[$firstarg-$#argv] $estr &

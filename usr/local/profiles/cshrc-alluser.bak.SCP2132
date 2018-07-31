@@ -1,0 +1,46 @@
+#!/bin/csh
+#
+#   This is the system .cshrc file
+#
+#
+#   Author:  Mike Gahan
+#   Version: 2
+#   Date:    29-11-93
+#
+# Set command prompt to include history number.
+if ( $?prompt ) set prompt='\! % '
+set history = 24
+
+# Make at jobs use csh
+alias at 'at -c'
+
+# Make ls display whether a file is a directory, etc.
+alias ls 'ls -F'
+
+# The tidy command removes all deleted mail.
+alias tidy 'find $home/Mail -name ",*" -exec /bin/rm {} \;; folder -pack -all -recurse'
+
+# Set default terminal type.
+set defterm=dumb
+
+# Make all files private by default. (To remove privacy use `umask 022')
+umask 077
+
+# alias history command:
+alias h 'history'
+
+# aliases for use command
+alias xlf 'xlf $XLFCFG'
+alias use 'set args=(\!*); source /usr/local/rbin/use'
+
+# cwd alias
+alias cwd 'echo $cwd'
+
+# Use -437 flag to suppress spurious error message
+source /usr/local/profiles/set.PLATFORM
+if ($PLATFORM == sun) then
+   alias unix2dos 'unix2dos -437'
+   alias dos2unix 'dos2unix -437'
+   alias inspath 'set argv=(\!*);source /usr/local/rbin/inspath'
+   alias delpath 'set argv=(\!*);source /usr/local/rbin/delpath'
+endif

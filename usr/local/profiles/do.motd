@@ -1,0 +1,4 @@
+#!/bin/ksh -f
+
+dir=`/usr/local/rbin/sname -p`
+cat $dir/motd

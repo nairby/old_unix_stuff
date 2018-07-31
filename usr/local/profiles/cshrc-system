@@ -1,0 +1,12 @@
+#!/bin/csh
+#
+#   This is the system .cshrc file
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+source /usr/local/profiles/cshrc-alluser
+#
+source /usr/local/profiles/cshrc-newuser

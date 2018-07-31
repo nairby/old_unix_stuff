@@ -1,0 +1,39 @@
+#!/bin/csh
+#
+#  Set WSMODE variable:
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+if ( $?XSTATION ) then
+  set wsmode=remote
+  xrdb -remove
+  setenv EXDISPLAY $DISPLAY
+else if ( $?DTUSERSESSION ) then
+  set wsmode=local
+
+else
+  set tty=`tty | sed 's+/dev/++;s+[^a-z,A-Z].*++'`
+
+  switch ($tty)
+
+    case pts:
+    case ttyp:
+    case ttyR:
+    case ttyx:
+     set wsmode=remote
+     breaksw
+ 
+    case console:
+    case hft:
+    case tty:
+      set wsmode=local
+      breaksw
+
+  endsw
+endif
+
+setenv WSMODE $wsmode
+

@@ -1,0 +1,2 @@
+Change set.WSMODE and set.XTERM to recognise /dev/ttyx* as a remote
+non X terminal.

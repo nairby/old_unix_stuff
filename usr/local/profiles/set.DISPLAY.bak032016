@@ -1,0 +1,6 @@
+#!/bin/csh
+#
+#  Set DISPLAY variable from `who am i` output
+#
+setenv DISPLAY `/bin/who am i | sed 's/.*(//;s/\.bc.*/\.bcc\.ac\.uk:0/;s/\.cc\.ucl.*/\.cc\.ucl\.ac\.uk:0/;2,$d'`
+setenv EXDISPLAY $DISPLAY

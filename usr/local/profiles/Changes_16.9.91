@@ -1,0 +1,25 @@
+Structural changes:
+
+For compatibility with pyramid .login, .cshrc files, which call 
+login-system and cshrc-system, and expect these to do the newuser things as 
+well:
+
+*-system renamed to *-alluser
+.login , .cshrc source to *-alluser rather than *-system
+*-system source to *-alluser then *-newuser
+ln -s *-alluser .*-system (compatibility)
+
+Modifications should be made to *-alluser and *-newuser in future.
+
+
+Content changes:
+
+login-alluser:
+
+  setenv TZ GMT0BST,M3.5.0,M10.5.0
+
+  for timezone fix.
+
+  setenv MAILMACHINE ts  for spool mail delivery
+  setenv MAILDROP, MAILBOX correctly for spool mail delivery
+

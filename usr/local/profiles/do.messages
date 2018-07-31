@@ -1,0 +1,36 @@
+#!/bin/csh
+#
+#   Print messages at login (or other) times
+#
+#   Mike Gahan 
+#   Version 1
+#   2/7/91
+#
+#   Use MESSAGE_FILES environment variable as a list of files
+#   to be printed. If unset, use built in list below.
+#
+#   If item in list is a normal file, print it.
+#   If it is a directory, print each member.
+#
+if ( ! -e $HOME/.hushlogin ) then
+
+if ( $?MESSAGE_FILES ) then
+   set messages=( $MESSAGE_FILES )
+else 
+   set messages = ( \
+                    \
+    /etc/localmotd  \
+                    \
+    )
+endif
+
+foreach m ( $messages )
+   if ( -d $m ) then
+      cat $m/*
+   else if ( -f $m ) then
+      cat $m
+   endif
+
+end
+
+endif

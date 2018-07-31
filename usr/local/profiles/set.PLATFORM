@@ -1,0 +1,31 @@
+#!/bin/csh
+#
+#   Set the environment variable PLATFORM
+#
+#   Author:  Andrew Dawson (based on an original work by Mike Gahan)
+#   Version: 3
+#   Date:    6-4-98
+
+set systype=`uname`
+
+switch ($systype)
+
+   case AIX:
+     set plat=rs6
+     breaksw
+
+   case SunOS:
+     set plat=sun
+     breaksw
+
+   case Linux:
+     set plat=linux
+     breaksw
+
+   default:
+     set plat=unknown
+     breaksw
+
+endsw
+
+setenv PLATFORM $plat

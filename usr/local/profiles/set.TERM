@@ -1,0 +1,53 @@
+#!/bin/csh
+#
+# set the TERM variable
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+if ( ! $?TERM ) then 
+  if ( $XTERM == no ) then 
+     setenv TERM unknown
+  else
+     setenv TERM aixterm
+     stty erase '^H'
+  endif
+endif
+if ( ! $?defterm ) set defterm=''
+
+switch ( $TERM )
+
+  case unknown:
+  case network:
+  case dumb:
+    eval `tset -sQ "?$defterm"`
+    unset noglob
+    breaksw
+
+endsw
+
+if (( $PLATFORM == ps2 || $PLATFORM == rcs ) && $TERM == aixterm ) setenv TERM hft
+
+if ( $WSMODE == local  && $PLATFORM == ps2) then
+   cursor
+endif
+
+stty intr ^C
+stty susp ^Z
+stty quit ^\\
+
+if ( $PLATFORM != "linux") then
+        stty dsusp ^Y
+endif
+
+if ( $?deferase) then
+   stty erase $deferase
+else 
+   if ( $XTERM != no )  then
+     stty erase ^H
+   else
+     stty erase 
+   endif
+endif

@@ -1,0 +1,12 @@
+#!/bin/csh
+#
+#   This is the system .login file (compatibility)
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+source /usr/local/profiles/login-alluser
+#
+source /usr/local/profiles/login-newuser

@@ -1,0 +1,44 @@
+How the dot files hang together.
+
+.login , .cshrc:
+
+  These are the template files which should be installed in the users'
+home directory at registration time. These call login-alluser , login-newuser ;
+cshrc-alluser , cshrc-newuser.  Users may remove the call to -newuser from
+their copies of the files. Users may add their own customisation to their
+copies.
+
+
+login-alluser , cshrc-alluser:
+
+  These perform session initialisation tasks which must be completed for the
+satisfactory conduct of the user's session. These are called (sourced) from
+the template .login and .cshrc files.
+
+
+login-newuser , cshrc-newuser:
+
+  These perform session and shell initialisations appropriate to naive users
+of the system. They are called from the template .login and .cshrc files, but
+users may remove the calls if they wish.
+
+
+The above files constitute the core of the profile scheme. There are additional
+files which are included in the directory for compatibility reasons:
+
+login-system , cshrc-system:
+
+  These are included for users migrating from the pyramid, who wish to continue
+using their pyramid .login and .cshrc files. The pyramid dotfiles make a single
+call to *-system, and expect the system and newuser initialisation to occur.
+login-system , cshrc-system thus source to *-alluser and *-newuser.
+
+.*-system:
+
+  Some versions of the AIX dotfiles source to .*-system, when they mean 
+*-alluser.  .*-system should be a link to *-alluser.
+
+.*-newuser:
+ 
+  Some versions of the AIX dotfiles source to .*-newuser when they mean
+*-newuser. .*-newuser should be a link to *-newuser.

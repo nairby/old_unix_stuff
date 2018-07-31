@@ -1,0 +1,62 @@
+#!/bin/csh
+#
+#
+#   Author:  Mike Gahan
+#   Last Updated:  3-Dec-93
+#
+
+if ( ! $?LPS ) then
+   set LPS=/usr/local/profiles
+endif
+
+source $LPS/set.PLATFORM
+
+if ($PLATFORM == sun) then 
+  set path = ( . /usr/local/bin /usr/local/rbin /usr/bin /usr/sbin /usr/local/public /usr/ucb /usr/ccs/bin /usr/openwin/bin /usr/local/rlib/SunWorkshop/SUNWspro/bin /usr/dt/bin)
+  setenv MANPATH /usr/local/rlib/SunWorkshop/SUNWspro/man:usr/man:/usr/share/man:/usr/dt/share/man
+  setenv LD_LIBRARY_PATH /usr/lib:/usr/openwin/lib
+  else
+  setenv LANG En_US
+  set path = (. /usr/local/bin /usr/local/rbin /bin /usr/bin /etc /usr/ucb /usr/bin/X11 /usr/local/public)
+  endif
+
+setenv LC_COLLATE C
+setenv TERMINFO /usr/local/rlib/terminfo
+
+$LPS/do.motd
+
+if ( ! $?ENVIRONMENT ) setenv ENVIRONMENT ONLINE
+if ( $ENVIRONMENT != BATCH ) then
+  source $LPS/process.TERM
+  if ( ! $?XTERM ) then
+   source $LPS/set.WSMODE
+   source $LPS/set.XTERM
+  endif
+  source $LPS/set.TERM
+endif
+source $LPS/set.CBSERVER
+
+setenv EDITOR /usr/bin/vi
+setenv PAGER  more
+setenv EXINIT 'set redraw showmode'
+
+# setenv TZ BST-1
+# setenv TZ GMT0
+setenv TZ GMT0BST,M3.5.0,M10.5.0
+
+# find maildrop/box and check for mail
+setenv MAILDROP /usr/spool/mail/$USER
+setenv MAILBOX  /usr/spool/mail/$USER
+
+mailsize
+pwwarn 98
+
+# if ($PLATFORM != sun) then
+# Put any IBM specific lines in here
+# endif
+
+# Default product versions - for use command
+setenv XLFCFG ''
+
+# Miranda library location
+setenv MIRALIB /usr/local/rlib/miralib

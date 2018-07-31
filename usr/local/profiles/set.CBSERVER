@@ -1,0 +1,20 @@
+#!/bin/csh
+#
+#   Set the environment variable CBSERVER
+#
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+#   Version: 2
+#   Date:    23-5-91
+#   Set CBSERVER correctly for bird-like ps2s
+#   
+#   Version: 3 (Adrian)
+#   Date     4-12-92
+#   Set CBSERVER for the CB server machine
+
+# Use the Coloured Books server:
+setenv CBSERVER "cbs.bcc.ac.uk"
+exit 0

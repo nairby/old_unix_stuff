@@ -1,0 +1,36 @@
+#!/bin/csh
+#
+# Process the TERM variable
+#
+#   Author:  Mike Gahan
+#   Version: 1
+#   Date:    23-4-91
+#
+#
+if ( ! $?TERM ) exit ( 0 )
+
+set tt=($TERM)
+if ( $#tt == 1) exit ( 0 )
+switch ($tt[1])
+
+   case +e:
+    /bin/rm $HOME/.hushlogin
+    exec $tt[2-$#tt]
+    breaksw
+
+   case +s:
+    setenv XTERM $tt[3]
+    if ( $tt[2] != 0 ) then
+      setenv DISPLAY $tt[2]
+      setenv EXDISPLAY $DISPLAY
+      setenv XENVIRONMENT $HOME/.Xdefaults-$XTERM
+    endif
+    setenv TERM  $tt[4]
+    if ( $TERM == hft-c && $PLATFORM == rs6 ) setenv TERM aixterm
+    setenv WSMODE remote
+    breaksw
+
+endsw
+
+
+
